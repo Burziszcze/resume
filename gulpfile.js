@@ -1,39 +1,34 @@
 "use strict";
 
-// Load plugins
-const autoprefixer = require("autoprefixer");
-const cssnano = require("cssnano");
 const gulp = require("gulp");
-const sass = require("gulp-sass");
-const plumber = require("gulp-plumber");
-const postcss = require("gulp-postcss");
+const sass = require("gulp-sass")(require("sass"));
+const cleanCSS = require("gulp-clean-css");
 const rename = require("gulp-rename");
 
-// CSS task
-function css() {
+function styles() {
   return gulp
     .src("./assets/scss/**/*.scss")
-    .pipe(plumber())
-    .pipe(sass({ outputStyle: "expanded" }))
-    .pipe(gulp.dest("./assets/css/"))
-    .pipe(gulp.dest("./pages/css/"))
-    .pipe(rename({ suffix: ".min" }))
-    .pipe(postcss([autoprefixer(), cssnano()]))
+    .pipe(
+      sass({
+        outputStyle: "expanded",
+      })
+    )
+    .pipe(sass().on("error", sass.logError))
+    .pipe(
+      cleanCSS({
+        compatibility: "ie8",
+      })
+    )
+    .pipe(
+      rename({
+        suffix: ".min",
+      })
+    )
     .pipe(gulp.dest("./assets/css/"))
     .pipe(gulp.dest("./pages/css/"));
 }
 
-// Watch files
-function watchFiles() {
-  gulp.watch("./assets/scss/**/*", css);
-}
-
-// define complex tasks
-const build = gulp.series(gulp.parallel(css));
-const watch = gulp.parallel(watchFiles);
-
-// export tasks
-exports.watch = watch;
-exports.build = build;
-
-exports.default = watch;
+exports.styles = styles;
+exports.watch = function () {
+  gulp.watch("./sass/**/*.scss", ["sass"]);
+};
