@@ -1,11 +1,11 @@
 "use strict";
 
+// Load plugins
 const gulp = require("gulp");
 const browsersync = require("browser-sync").create();
 const sass = require("gulp-sass")(require("sass"));
 const cleanCSS = require("gulp-clean-css");
 const rename = require("gulp-rename");
-
 
 // BrowserSync
 function browserSync(done) {
@@ -24,6 +24,7 @@ function browserSyncReload(done) {
   done();
 }
 
+// Compile sass files
 function styles() {
   return gulp
     .src("./assets/scss/**/*.scss")
@@ -48,12 +49,15 @@ function styles() {
     .pipe(browsersync.stream());
 }
 
+// Watch styles
 function watchStyles() {
   gulp.watch("./assets/scss/**/*.scss", styles);
   gulp.series(browserSyncReload)
 }
 
+// define complex tasks
 const watch = gulp.parallel(watchStyles, browserSync);
 
+// export tasks
 exports.styles = styles;
 exports.watch = watch;
