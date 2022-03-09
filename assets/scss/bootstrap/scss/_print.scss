@@ -87,7 +87,8 @@
     // We don't set margin here because it breaks `size` in Chrome. We also
     // don't use `!important` on `size` as it breaks in Chrome.
     @page {
-      size: $print-page-size;
+      // size: $print-page-size;
+      size: a4;
     }
     body {
       min-width: $print-body-min-width !important;
