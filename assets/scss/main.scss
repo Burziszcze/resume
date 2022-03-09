@@ -60,6 +60,10 @@ a.theme-btn-on-bg,
   background-color: $theme-color-primary;
 }
 
+.resume-body {
+  padding: 2rem;
+}
+
 .resume-wrapper {
   padding-top: 30px;
   padding-bottom: 60px;
@@ -241,26 +245,60 @@ a.theme-btn-on-bg,
     height: auto;
   }
 
-  .resume-header .picture {
-    width: 150px;
-    border: 5px solid #404040;
-    height: auto;
-    @include border-radius(3px);
-  }
+  // .resume-header .picture {
+  //   width: 150px;
+  //   border: 5px solid #404040;
+  //   height: auto;
+  //   @include border-radius(3px);
+  // }
 }
 
 // print
 
-@each $breakpoint in map-keys($grid-breakpoints) {
-  @include media-breakpoint-up($breakpoint) {
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+// @each $breakpoint in map-keys($grid-breakpoints) {
+//   @include media-breakpoint-up($breakpoint) {
+//     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-    @for $i from 1 through $grid-columns {
-      @media print {
-        .col-print#{$infix}-#{$i} {
-          @include make-col($i, $grid-columns);
-        }
-      }
+//     @for $i from 1 through $grid-columns {
+//       @media print {
+//         .col-print#{$infix}-#{$i} {
+//           @include make-col($i, $grid-columns);
+//         }
+//       }
+//     }
+//   }
+// }
+
+@media print {
+  body {
+    margin: none !important;
+  }
+  .resume-header .picture {
+    width: 175px;
+  }
+  .resume-header {
+    background: $theme-bg-light;
+    color: $theme-text-color-primary;
+    height: 203px;
+    a {
+      color: $theme-text-color-primary;
     }
+  }
+  .resume-body {
+    padding: 1rem !important;
+  }
+  .resume-section-title {
+    padding-bottom: 0rem !important;
+
+    &:after {
+      display: none;
+    }
+  }
+  .clause {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  .shadow-lg {
+    box-shadow: none !important;
   }
 }
