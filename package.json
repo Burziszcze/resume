@@ -16,8 +16,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp styles",
-    "watch": "gulp watch",
-    "serve": "http-server"
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
