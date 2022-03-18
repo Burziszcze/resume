@@ -23,7 +23,7 @@ $theme-colors: (
 body {
   // font-family: 'Roboto', sans-serif;
   font-family: "Lato", sans-serif;
-  background: $theme-bg-light;
+  // background: $theme-bg-light;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $theme-text-color-primary;
@@ -272,6 +272,12 @@ a.theme-btn-on-bg,
 @media print {
   body {
     margin: none !important;
+  }
+  div {
+    break-inside: avoid;
+  }
+  .rows-print-as-pages {
+    page-break-before: always;
   }
   .resume-header .picture {
     width: 175px;
