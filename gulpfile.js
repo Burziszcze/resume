@@ -54,9 +54,12 @@ function watchStyles() {
   gulp.watch("./assets/scss/**/*.scss", styles);
   gulp.series(browserSyncReload)
 }
-
+function watchHTML() {
+  gulp.watch("*.html")
+  gulp.series(browserSyncReload)
+}
 // define complex tasks
-const watch = gulp.parallel(watchStyles, browserSync);
+const watch = gulp.parallel(watchStyles, watchHTML, browserSync);
 
 // export tasks
 exports.styles = styles;
